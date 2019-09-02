@@ -8,22 +8,21 @@ WER are we? An attempt at tracking states of the art(s) and recent results on sp
 
 (Possibly trained on more data than LibriSpeech.)
 
-| WER test-clean | WER test-other | Paper          | Published | Notes   |
-| :------------- | :------------- | :------------- | :-------- | :-----: |
-| 2.3%  | 5.0%   | [RWTH ASR Systems for LibriSpeech: Hybrid vs Attention](https://arxiv.org/abs/1905.03072) | September 2019, Interspeech | HMM-DNN + lattice-based sMBR + LSTM LM + Transformer LM rescoring (no data augmentation) |
-| 2.5%  | 5.8%   | [SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition](https://arxiv.org/abs/1904.08779) | April 2019 | Listen Attend Spell |
-| 5.83% | 12.69% | [Deep Speech 2: End-to-End Speech Recognition in English and Mandarin](http://arxiv.org/abs/1512.02595v1) | December 2015 | *Humans* |
-| 3.19% | 7.64% | [The CAPIO 2017 Conversational Speech Recognition System](https://arxiv.org/abs/1801.00059) | April 2018 | TDNN + TDNN-LSTM + CNN-bLSTM + Dense TDNN-LSTM across two kinds of trees
-| 3.80% | 8.76%  | [Semi-Orthogonal Low-Rank Matrix Factorization for Deep Neural Networks](http://www.danielpovey.com/files/2018_interspeech_tdnnf.pdf) | Interspeech, Sept 2018 |[Kaldi recipe](https://github.com/kaldi-asr/kaldi/blob/master/egs/librispeech/s5/local/chain/tuning/run_tdnn_1d.sh), 17-layer TDNN-F + iVectors|
-| 2.8%  | 9.3%   | [RWTH ASR Systems for LibriSpeech: Hybrid vs Attention](https://arxiv.org/abs/1905.03072) | September 2019, Interspeech | encoder-attention-decoder + BPE + Transformer LM (no data augmentation) |
-| 3.26% | 10.47% | [Fully Convolutional Speech Recognition](https://arxiv.org/abs/1812.06864) | December 2018 | End-to-end CNN on the waveform + conv LM|
-| 3.82% | 12.76% | [Improved training of end-to-end attention models for speech recognition](https://www-i6.informatik.rwth-aachen.de/publications/download/1068/Zeyer--2018.pdf) | Interspeech, Sept 2018 | encoder-attention-decoder end-to-end model |
-| 4.28% | | [Purely sequence-trained neural networks for ASR based on lattice-free MMI](http://www.danielpovey.com/files/2016_interspeech_mmi.pdf) | September 2016 | HMM-TDNN trained with MMI + data augmentation (speed) + iVectors + 3 regularizations |
-| 4.83% | | [A time delay neural network architecture for efficient modeling of long temporal contexts](http://speak.clsp.jhu.edu/uploads/publications/papers/1048_pdf.pdf) | 2015 | HMM-TDNN + iVectors |
-| 5.15% | 12.73% | [Deep Speech 2: End-to-End Speech Recognition in English and Mandarin](http://proceedings.mlr.press/v48/amodei16.pdf) | December 2015 | 9-layer model w/ 2 layers of 2D-invariant convolution & 7 recurrent layers, w/ 100M parameters trained on 11940h |
-| 5.51% | 13.97% | [LibriSpeech: an ASR Corpus Based on Public Domain Audio Books](http://www.danielpovey.com/files/2015_icassp_librispeech.pdf) | 2015 | HMM-DNN + pNorm[*](http://www.danielpovey.com/files/2014_icassp_dnn.pdf) |
-| 4.8%  | 14.5% | [Letter-Based Speech Recognition with Gated ConvNets](https://arxiv.org/abs/1712.09444) | December 2017 | (Gated) ConvNet for AM going to letters + 4-gram LM |
-| 8.01% | 22.49% | same, [Kaldi](http://kaldi-asr.org/) | 2015 | HMM-(SAT)GMM |
+| WER test-clean | WER test-other | Train dataset hrs | Paper          | Published | Notes   |
+| :------------- | :------------- | :---------------- | :------------- | :-------- | :-----: |
+| 2.3%  | 5.0%   | LibriSpeech 960h | [RWTH ASR Systems for LibriSpeech: Hybrid vs Attention](https://arxiv.org/abs/1905.03072) | September 2019, Interspeech | HMM-DNN + lattice-based sMBR + LSTM LM + Transformer LM rescoring (no data augmentation) |
+| 2.5%  | 5.8%   | LibriSpeech 960h + 300| [SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition](https://arxiv.org/abs/1904.08779) | April 2019 | Listen Attend Spell |
+| 5.83% | 12.69% | WSJ 80h + Switchboard 300h + Fisher 2000 + LibriSpeach 960h + (Baidu) 8600h = 11940h | [Deep Speech 2: End-to-End Speech Recognition in English and Mandarin](http://arxiv.org/abs/1512.02595v1) | December 2015 | *Humans* -- 9-layer model w/ 2 layers of 2D-invariant convolution & 7 recurrent layers, w/ 100M parameters trained on 11940h|
+| 3.19% | 7.64% | TED-LIUM 212h and LibriSpeech 960h | [The CAPIO 2017 Conversational Speech Recognition System](https://arxiv.org/abs/1801.00059) | April 2018 | TDNN + TDNN-LSTM + CNN-bLSTM + Dense TDNN-LSTM across two kinds of trees
+| 3.80% | 8.76%  | Switchboard 300h and Fisher+Switchboard 2000h | [Semi-Orthogonal Low-Rank Matrix Factorization for Deep Neural Networks](http://www.danielpovey.com/files/2018_interspeech_tdnnf.pdf) | Interspeech, Sept 2018 |[Kaldi recipe](https://github.com/kaldi-asr/kaldi/blob/master/egs/librispeech/s5/local/chain/tuning/run_tdnn_1d.sh), 17-layer TDNN-F + iVectors|
+| 2.8%  | 9.3%   | LibriSpeech 960h | [RWTH ASR Systems for LibriSpeech: Hybrid vs Attention](https://arxiv.org/abs/1905.03072) | September 2019, Interspeech | encoder-attention-decoder + BPE + Transformer LM (no data augmentation) |
+| 3.26% | 10.47% | WSJ+Librispeech 1080h | [Fully Convolutional Speech Recognition](https://arxiv.org/abs/1812.06864) | December 2018 | End-to-end CNN on the waveform + conv LM|
+| 3.82% | 12.76% | Switchboard+Fisher 2000h and LibriSpeech 960h | [Improved training of end-to-end attention models for speech recognition](https://www-i6.informatik.rwth-aachen.de/publications/download/1068/Zeyer--2018.pdf) | Interspeech, Sept 2018 | encoder-attention-decoder end-to-end model |
+| 4.28% | | Switchboard 300h | [Purely sequence-trained neural networks for ASR based on lattice-free MMI](http://www.danielpovey.com/files/2016_interspeech_mmi.pdf) | September 2016 | HMM-TDNN trained with MMI + data augmentation (speed) + iVectors + 3 regularizations |
+| 4.83% | | Switchboard 300h | [A time delay neural network architecture for efficient modeling of long temporal contexts](http://speak.clsp.jhu.edu/uploads/publications/papers/1048_pdf.pdf) | 2015 | HMM-TDNN + iVectors |
+| 5.51% | 13.97% | LibriSpeech 960h | [LibriSpeech: an ASR Corpus Based on Public Domain Audio Books](http://www.danielpovey.com/files/2015_icassp_librispeech.pdf) | 2015 | HMM-DNN + pNorm[*](http://www.danielpovey.com/files/2014_icassp_dnn.pdf) |
+| 4.8%  | 14.5% | WSJ 90h and LibriSpeech 960h | [Letter-Based Speech Recognition with Gated ConvNets](https://arxiv.org/abs/1712.09444) | December 2017 | (Gated) ConvNet for AM going to letters + 4-gram LM |
+| 8.01% | 22.49% | | same, [Kaldi](http://kaldi-asr.org/) | 2015 | HMM-(SAT)GMM |
 | | 12.51% | [Audio Augmentation for Speech Recognition](http://www.danielpovey.com/files/2015_interspeech_augmentation.pdf) | 2015 | TDNN + pNorm + speed up/down speech |
 
 ### WSJ
